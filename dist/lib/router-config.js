@@ -32,8 +32,9 @@ function resolveRequest(err, res, body = {}) {
 exports.resolveRequest = resolveRequest;
 function minifyResponse(res, name, data, cachePath) {
     const content = fs_1.readFileSync('templates/' + name + '.ejs', 'utf8');
+    const templatePath = data.templatesPath || './templates';
     let html = ejs.render(content, data, {
-        filename: __dirname + '/../../templates/' + name
+        filename: `${templatePath}/${name}`
     });
     if (data.instance === 'prod') {
         html = html_minifier_1.minify(html, exports.minificationOptions);
@@ -52,7 +53,7 @@ exports.minifyResponse = minifyResponse;
 function serve(req, res) {
     res.serve = (name, options = {}) => {
         const config = req.serverConfig || server_config_1.serverConfig;
-        const data = Object.assign({}, config, options);
+        const data = Object.assign({}, config, options, { templatesPath: req.templatesPath });
         minifyResponse(res, name, data);
     };
 }

@@ -37,8 +37,9 @@ export function minifyResponse(
   cachePath?: string
 ) {
   const content = readFileSync('templates/' + name + '.ejs', 'utf8');
+  const templatePath = data.templatesPath || './templates';
   let html = ejs.render(content, data, {
-    filename: __dirname + '/../../templates/' + name
+    filename: `${templatePath}/${name}`
   });
   if (data.instance === 'prod') {
     html = minify(html, minificationOptions);
@@ -56,7 +57,7 @@ export function minifyResponse(
 export function serve(req: AppRequest, res: AppResponse) {
   res.serve = (name: string, options = {}) => {
     const config = req.serverConfig || serverConfig;
-    const data = { ...config, ...options };
+    const data = { ...config, ...options, templatesPath: req.templatesPath };
     minifyResponse(res, name, data);
   };
 }

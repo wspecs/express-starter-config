@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 
 export interface AppRequest extends Request {
+  templatesPath?: string;
   adminSession?: {
     user: any;
   };

@@ -36,7 +36,6 @@ function configureRest(app, express, locales = []) {
         throw new Error('public path is missing');
     }
     app.use(express.static(app.get('publicPath'), { maxAge: app.get('maxAge') }));
-    console.log(__dirname);
     /**
      * Define default headers for the application.
      */
@@ -77,7 +76,7 @@ function configureRest(app, express, locales = []) {
             autoReload: true,
             locales: locales,
             defaultLocale: locales[0],
-            directory: __dirname + '/../../locales',
+            directory: './locales',
             queryParameter: 'locale',
             cookie: 'locale'
         });
