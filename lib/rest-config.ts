@@ -5,12 +5,20 @@ import { resolve, serve } from './router-config';
 import { AppRequest, AppResponse } from './types';
 import { serverConfig } from './server-config';
 import * as i18n from 'i18n';
+import * as exp from 'express';
+import { getAllLocales } from './locale';
 const sessions = require('client-sessions');
+
+export function configureApp(locales: string[] = getAllLocales()) {
+  const app = exp();
+  configureRest(app, exp, locales);
+  return app;
+}
 
 export function configureRest(
   app: Application,
   express: any,
-  locales: string[] = []
+  locales: string[] = getAllLocales()
 ) {
   // session limit in seconds
   if (serverConfig.sessionAge) {

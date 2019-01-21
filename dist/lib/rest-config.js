@@ -5,8 +5,16 @@ const cookieParser = require("cookie-parser");
 const router_config_1 = require("./router-config");
 const server_config_1 = require("./server-config");
 const i18n = require("i18n");
+const exp = require("express");
+const locale_1 = require("./locale");
 const sessions = require('client-sessions');
-function configureRest(app, express, locales = []) {
+function configureApp(locales = locale_1.getAllLocales()) {
+    const app = exp();
+    configureRest(app, exp, locales);
+    return app;
+}
+exports.configureApp = configureApp;
+function configureRest(app, express, locales = locale_1.getAllLocales()) {
     // session limit in seconds
     if (server_config_1.serverConfig.sessionAge) {
         app.set('sessionAge', app.get('sessionAge') || server_config_1.serverConfig.sessionAge || 2 * 60 * 60);

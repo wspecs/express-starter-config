@@ -7,3 +7,5 @@ __export(require("./lib/rest-config"));
 __export(require("./lib/router-config"));
 __export(require("./lib/server-config"));
 __export(require("./lib/router"));
+__export(require("./lib/locale"));
+__export(require("./lib/server"));
