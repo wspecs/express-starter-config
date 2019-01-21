@@ -1,1 +1,1 @@
-export declare function getAllLocales(folder?: string): string[];
+export declare function getAllLocales(folder?: string): any;
