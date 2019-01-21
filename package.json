@@ -29,6 +29,8 @@
     "source-map": "^0.7.2"
   },
   "dependencies": {
+    "@decorators/di": "^1.0.2",
+    "@decorators/express": "^2.3.0",
     "args-finder": "0.0.3",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.2",
