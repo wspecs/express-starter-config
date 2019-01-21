@@ -41,7 +41,6 @@ class BasicRoutes {
     }
     setLocale(req, res) {
         let locale = req.params.locale;
-        console.log('locale before', locale);
         if (locale == null) {
             locale = this.getCookie(req, 'locale');
         }

@@ -31,8 +31,8 @@ function resolveRequest(err, res, body = {}) {
 }
 exports.resolveRequest = resolveRequest;
 function minifyResponse(res, name, data, cachePath) {
-    const content = fs_1.readFileSync('templates/' + name + '.ejs', 'utf8');
     const templatePath = data.templatesPath || './templates';
+    const content = fs_1.readFileSync(`${templatePath}/${name}.ejs`, 'utf8');
     let html = ejs.render(content, data, {
         filename: `${templatePath}/${name}`
     });

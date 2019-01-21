@@ -36,8 +36,8 @@ export function minifyResponse(
   data: Map,
   cachePath?: string
 ) {
-  const content = readFileSync('templates/' + name + '.ejs', 'utf8');
   const templatePath = data.templatesPath || './templates';
+  const content = readFileSync(`${templatePath}/${name}.ejs`, 'utf8');
   let html = ejs.render(content, data, {
     filename: `${templatePath}/${name}`
   });
