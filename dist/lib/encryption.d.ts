@@ -1,5 +1,5 @@
-export declare function afterSerialization(plaintext: string): any;
-export declare function beforeDeserialization(ciphertext: string): any;
+export declare function afterSerialization(plaintext: string): string;
+export declare function beforeDeserialization(ciphertext: string): string;
 export declare function hashInfo(input: string): {
     salt: any;
     hash: any;

@@ -19,5 +19,5 @@ export declare class BasicRoutes {
     addGET(path: string, handler: any): void;
     addPOST(path: string, handler: any): void;
     addErrorRoute(): void;
-    getAll(): any;
+    getAll(): Router;
 }
