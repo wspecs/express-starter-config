@@ -44,7 +44,6 @@
     "client-sessions": "^0.8.0",
     "cookie-parser": "^1.4.3",
     "cookies": "^0.7.1",
-    "crypto": "^1.0.1",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "great-logs": "0.0.4",
