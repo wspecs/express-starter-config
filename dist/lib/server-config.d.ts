@@ -8,8 +8,8 @@ export declare const serverConfig: {
     sessionAge: number;
     secret: string;
     cookiePath: string;
-    useCookie: boolean;
-    httpOnly: boolean;
+    useCookie: string | boolean;
+    httpOnly: string | boolean;
     templatePath: any;
     publicPath: any;
     maxAge: any;
