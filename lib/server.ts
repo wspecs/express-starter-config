@@ -18,7 +18,7 @@ export class BaseApplicationServer {
    * @class Server
    * @constructor
    */
-  constructor(options: AppConfiguratorOptions) {
+  constructor(options: AppConfiguratorOptions = {}) {
     //create expressjs application
     this.app = configureApp(options);
     this.port = options.port || serverConfig.port;

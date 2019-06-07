@@ -12,7 +12,7 @@ export declare class BaseApplicationServer {
      * @class Server
      * @constructor
      */
-    constructor(options: AppConfiguratorOptions);
+    constructor(options?: AppConfiguratorOptions);
     addControllers(...args: any[]): void;
     start(): void;
 }

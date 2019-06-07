@@ -15,7 +15,7 @@ class BaseApplicationServer {
      * @class Server
      * @constructor
      */
-    constructor(options) {
+    constructor(options = {}) {
         this.port = server_config_1.serverConfig.port;
         //create expressjs application
         this.app = rest_config_1.configureApp(options);
