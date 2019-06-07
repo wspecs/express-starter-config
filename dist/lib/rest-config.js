@@ -8,13 +8,13 @@ const i18n = require("i18n");
 const exp = require("express");
 const locale_1 = require("./locale");
 const sessions = require('client-sessions');
-function configureApp(locales = locale_1.getAllLocales()) {
+function configureApp(options, locales = locale_1.getAllLocales()) {
     const app = exp();
-    configureRest(app, exp, locales);
+    configureRest(app, exp, locales, options);
     return app;
 }
 exports.configureApp = configureApp;
-function configureRest(app, express, locales = locale_1.getAllLocales()) {
+function configureRest(app, express, locales = locale_1.getAllLocales(), { publicPathHandler = null }) {
     // session limit in seconds
     if (server_config_1.serverConfig.sessionAge) {
         app.set('sessionAge', app.get('sessionAge') || server_config_1.serverConfig.sessionAge || 2 * 60 * 60);
@@ -43,6 +43,9 @@ function configureRest(app, express, locales = locale_1.getAllLocales()) {
     if (!app.get('publicPath')) {
         throw new Error('public path is missing');
     }
+    if (publicPathHandler) {
+        app.use(publicPathHandler);
+    }
     app.use(express.static(app.get('publicPath'), { maxAge: app.get('maxAge') }));
     /**
      * Define default headers for the application.
@@ -66,7 +69,7 @@ function configureRest(app, express, locales = locale_1.getAllLocales()) {
     if (!app.get('templatePath')) {
         throw new Error('template path is missing');
     }
-    app.set('view engine', 'ejs');
+    app.set('view engine', server_config_1.serverConfig.viewEngine);
     app.set('views', app.get('templatePath'));
     /**
      * Helper function to use with res.

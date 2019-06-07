@@ -9,16 +9,29 @@ import * as exp from 'express';
 import { getAllLocales } from './locale';
 const sessions = require('client-sessions');
 
-export function configureApp(locales: string[] = getAllLocales()) {
+export interface Handler {
+  (req: Request, res: Response, next: NextFunction): void;
+}
+
+export interface AppConfiguratorOptions {
+  publicPathHandler?: Handler | null;
+  port?: number | null;
+}
+
+export function configureApp(
+  options: AppConfiguratorOptions,
+  locales: string[] = getAllLocales()
+): Application {
   const app = exp();
-  configureRest(app, exp, locales);
+  configureRest(app, exp, locales, options);
   return app;
 }
 
 export function configureRest(
   app: Application,
   express: any,
-  locales: string[] = getAllLocales()
+  locales: string[] = getAllLocales(),
+  { publicPathHandler = null }: AppConfiguratorOptions
 ) {
   // session limit in seconds
   if (serverConfig.sessionAge) {
@@ -56,6 +69,9 @@ export function configureRest(
   if (!app.get('publicPath')) {
     throw new Error('public path is missing');
   }
+  if (publicPathHandler) {
+    app.use(publicPathHandler);
+  }
   app.use(express.static(app.get('publicPath'), { maxAge: app.get('maxAge') }));
 
   /**
@@ -88,7 +104,7 @@ export function configureRest(
   if (!app.get('templatePath')) {
     throw new Error('template path is missing');
   }
-  app.set('view engine', 'ejs');
+  app.set('view engine', serverConfig.viewEngine);
   app.set('views', app.get('templatePath'));
 
   /**

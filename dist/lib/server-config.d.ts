@@ -6,6 +6,7 @@ export declare const serverConfig: {
     port: any;
     base: string;
     sessionAge: number;
+    viewEngine: string;
     secret: string;
     cookiePath: string;
     useCookie: string | boolean;

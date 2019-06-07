@@ -1,3 +1,4 @@
+import { AppConfiguratorOptions } from './rest-config';
 import * as express from 'express';
 /**
  * The server.
@@ -11,7 +12,7 @@ export declare class BaseApplicationServer {
      * @class Server
      * @constructor
      */
-    constructor(port?: any);
+    constructor(options: AppConfiguratorOptions);
     addControllers(...args: any[]): void;
     start(): void;
 }

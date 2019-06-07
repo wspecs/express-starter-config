@@ -1,6 +1,6 @@
-import { configureApp } from './rest-config';
-import { serverConfig } from './server-config';
 // package-dependency import * from '@decorators/di';
+import { configureApp, AppConfiguratorOptions } from './rest-config';
+import { serverConfig } from './server-config';
 import { attachControllers, Controller } from '@decorators/express';
 import * as log from 'great-logs';
 import * as express from 'express';
@@ -18,10 +18,10 @@ export class BaseApplicationServer {
    * @class Server
    * @constructor
    */
-  constructor(port = serverConfig.port) {
+  constructor(options: AppConfiguratorOptions) {
     //create expressjs application
-    this.app = configureApp();
-    this.port = port;
+    this.app = configureApp(options);
+    this.port = options.port || serverConfig.port;
   }
 
   addControllers(...args: any[]) {

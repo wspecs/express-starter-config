@@ -10,6 +10,7 @@ let config = {
   port: args.options.port || DEFAULT_PORT,
   base: process.env.WSPECS_BASE || '',
   sessionAge: Number(process.env.WSPECS_SESSION_AGE || 60),
+  viewEngine: process.env.WSPECS_VIEW_ENGINE || 'ejs',
   secret: process.env.WSPECS_SECRET || 'secret',
   cookiePath: process.env.WSPECS_COOKIE_PATH || '/',
   useCookie: process.env.WSPECS_USE_COOKIE || true,
